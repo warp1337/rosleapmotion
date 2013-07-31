@@ -41,7 +41,7 @@ hand.roll
 INSTALLATION
 =======
 
-1. If you don't already have a catkin workspace, please follow these instructions before starting with 2. --> http://www.ros.org/wiki/catkin/Tutorials/create_a_workspace
+1. If you don't already have a catkin workspace, please follow these instructions before starting with 2.: http://www.ros.org/wiki/catkin/Tutorials/create_a_workspace
 
 2. cd ~/catkin_ws/src
 
