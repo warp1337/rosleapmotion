@@ -1,4 +1,4 @@
-rosleapmotion
+ROS LEAP MOTION
 =============
 
 Leap Motion ROS integration
@@ -11,27 +11,25 @@ Release 0.0.1 Includes:
 
 Currently this ros package features the extraction of one hand, the first to be recognized by the LEAP DEVICE.
 
-Hand-...
+(Vector3)
+direction.x
+direction.y
+direction.z
 
-Vector3
--direction.x
--direction.y
--direction.z
+(Vector3)
+normal.x
+normal.y
+normal.z
 
-Vector3
--normal.x
--normal.y
--normal.z
+(Point)
+pos.x
+pos.y
+pos.z
 
-Point
--pos.x
--pos.y
--pos.z
-
-Vector3
--hand.pitch
--hand.yaw
--hand.roll
+(Vector3)
+hand.pitch
+hand.yaw
+hand.roll
 
 
 INSTALLATION
