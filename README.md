@@ -7,8 +7,7 @@ Leap Motion ROS integration
 REQUIREMENTS
 ============
 
-ROS Groovy installed including rospy and geometry_msg
-LEAP MOTION SDK for Linux
+ROS Groovy installed including rospy and geometry_msg and the LEAP MOTION SDK for Linux
 
 
 FEATURES
