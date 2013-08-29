@@ -8,6 +8,7 @@ from leap_motion.msg import leapros
 # Obviously, this method publishes the data defined in leapros.msg to /leapmotion/data
 def sender():
     li = leap_interface.Runner()
+    li.setDaemon(True)
     li.start()
     # pub     = rospy.Publisher('leapmotion/raw',leap)
     pub_ros   = rospy.Publisher('leapmotion/data',leapros)

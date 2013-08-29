@@ -180,11 +180,13 @@ class Runner(threading.Thread):
 
     def __init__(self,arg=None):
         threading.Thread.__init__(self)
-        self._stop = False
         self.arg=arg
         self.listener = LeapInterface()
         self.controller = Leap.Controller()
         self.controller.add_listener(self.listener)
+    
+    def __del__(self):
+        self.controller.remove_listener(self.listener)
 
     def get_hand_direction(self):
         return self.listener.get_hand_direction()
@@ -205,10 +207,7 @@ class Runner(threading.Thread):
         return self.listener.get_hand_yaw()
 
     def run (self):
-        print "Press Enter to quit Leap Tracking"
-        while not self._stop:
-                if sys.stdin.readline():
-                    self.controller.remove_listener(self.listener)
-                    self._stop = True
-                # Save some CPU time
-                time.sleep(0.001)
+        while True:
+            # Save some CPU time
+            time.sleep(0.001)
+
