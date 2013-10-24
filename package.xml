@@ -2,7 +2,7 @@
 <package>
   <name>leap_motion</name>
   <version>0.0.1</version>
-  <description>The leap_motion package</description>
+  <description>ROS driver for the Leap Motion gesture sensor</description>
 
   <maintainer email="flier@techfak.uni-bielefeld.de">Florian Lier</maintainer>
   <maintainer email="mas644@gmail.com">Mirza Shah</maintainer>
