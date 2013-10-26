@@ -27,6 +27,6 @@ include_directories(include
 )
 
 install(PROGRAMS
-  scripts/sender.py scripts/subscriber.py
+  scripts/leap_interface.py scripts/sender.py scripts/subscriber.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
