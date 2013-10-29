@@ -7,7 +7,7 @@
   <maintainer email="flier@techfak.uni-bielefeld.de">Florian Lier</maintainer>
   <maintainer email="mas644@gmail.com">Mirza Shah</maintainer>
 
-  <license>GPLv2</license>
+  <license>BSD</license>
   <url type="website">https://wiki.ros.org/leap_motion</url>
   <author email="flier@techfak.uni-bielefeld.de">Florian Lier</author>
 
