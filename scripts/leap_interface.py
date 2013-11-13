@@ -19,8 +19,8 @@ import time
 # Set (append) your PYTHONPATH properly, or just fill in the location of your LEAP
 # SDK folder, e.g., ../LeapSDK/lib where the Leap.py lives and /LeapSDK/lib/x64 or
 # x86 where the *.so files reside.
-sys.path.append("/home/igor/Downloads/LeapDeveloperKit/LeapSDK/lib")
-sys.path.append("/home/igor/Downloads/LeapDeveloperKit/LeapSDK/lib/x64")
+sys.path.append("/homes/flier/Projects/Ongoing/Leap_Developer/LeapSDK/lib")
+sys.path.append("/homes/flier/Projects/Ongoing/Leap_Developer/LeapSDK/lib/x64")
 import threading
 import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
@@ -59,8 +59,8 @@ class LeapInterface(Leap.Listener):
         # Get the most recent frame and report some basic information
         frame = controller.frame()
 
-        print "Frame id: %d, timestamp: %d, hands: %d, fingers: %d, tools: %d, gestures: %d" % (
-              frame.id, frame.timestamp, len(frame.hands), len(frame.fingers), len(frame.tools), len(frame.gestures()))
+        #print "Frame id: %d, timestamp: %d, hands: %d, fingers: %d, tools: %d, gestures: %d" % (
+        #      frame.id, frame.timestamp, len(frame.hands), len(frame.fingers), len(frame.tools), len(frame.gestures()))
 
         if not frame.hands.is_empty: #recently changed in API
             # Get the first hand
@@ -98,10 +98,11 @@ class LeapInterface(Leap.Listener):
             self.hand_roll         = direction.roll * Leap.RAD_TO_DEG
 
             # Calculate the hand's pitch, roll, and yaw angles
-            print "Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees" % (self.hand_pitch, self.hand_roll, self.hand_yaw)
+            #print "Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees" % (self.hand_pitch, self.hand_roll, self.hand_yaw)
 
-            '''
+            
             # Gestures
+            
             for gesture in frame.gestures():
                 if gesture.type == Leap.Gesture.TYPE_CIRCLE:
                     circle = CircleGesture(gesture)
@@ -140,8 +141,9 @@ class LeapInterface(Leap.Listener):
                             gesture.id, self.state_string(gesture.state),
                             screentap.position, screentap.direction )
 
-        if not (frame.hands.empty and frame.gestures().empty):
-            print ""
+        if not (frame.hands.is_empty and frame.gestures().is_empty):
+            #print ""
+            None
 
     def state_string(self, state):
         if state == Leap.Gesture.STATE_START:
@@ -155,7 +157,7 @@ class LeapInterface(Leap.Listener):
 
         if state == Leap.Gesture.STATE_INVALID:
             return "STATE_INVALID"
-    '''
+    
 
     def get_hand_direction(self):
         return self.hand_direction
