@@ -1,16 +1,13 @@
 #!/usr/bin/python
+
 __author__ = 'Igor Zubrycki'
+
 import rospy
 import leap_interface
-###
-#
 import tf
 import sys
-sys.path.append(r"/home/igor/Downloads/LeapDeveloperKit_2.0.1+15831_linux/LeapSDK/lib")
-sys.path.append(r"/home/igor/Downloads/LeapDeveloperKit_2.0.1+15831_linux/LeapSDK/lib/x64")
 import Leap
 import math
-
 import roslib
 import rospy
 from std_msgs.msg import String
@@ -21,7 +18,6 @@ import actionlib_msgs.msg
 import trajectory_msgs.msg
 import collections
 import scipy.signal as signal
-#from Projekt.msg import point
 import geometry_msgs.msg
 import PyKDL
 
@@ -29,7 +25,7 @@ finger_names=["thumb","index","middle","ring","pinky"]
 bones_names=["metacarpal","proximal","intermediate","distal"]
 
 def make_kdl_frame(leap_basis_matrix,leap_position_vector,is_left=False):
-    #makes kdl frame from Leap Motion matrix and vector formats
+    # Makes kdl frame from Leap Motion matrix and vector formats
     
     if is_left:
        basis=([-el for el in leap_basis_matrix.x_basis.to_float_array()]+
@@ -39,7 +35,7 @@ def make_kdl_frame(leap_basis_matrix,leap_position_vector,is_left=False):
     else:
        basis=leap_basis_matrix.to_array_3x3() 
     rotation_mat=PyKDL.Rotation(*basis).Inverse()
-    #rotation_mat=PyKDL.Rotation(*[1,0,0,0,1,0,0,0,1])#.Inverse()
+    # rotation_mat=PyKDL.Rotation(*[1,0,0,0,1,0,0,0,1])#.Inverse()
     placement=PyKDL.Vector(*leap_position_vector.to_float_array())/1000.0 #to m
     return PyKDL.Frame(rotation_mat,placement)
     
@@ -53,12 +49,12 @@ hand_ground_tf=PyKDL.Frame(PyKDL.Rotation.EulerZYX(0, 0, math.pi/2.0),PyKDL.Vect
 def make_tf_dict(hand,hand_name):
     
     hand_dict={}
-    #hand_ground_tf=
+    # hand_ground_tf=
     hand_dict["hand_ground"]=["ground",hand_ground_tf]
     
             
     hand_tf=make_kdl_frame(hand.basis,hand.palm_position,hand.is_left)
-    #hand_tf=make_kdl_frame(hand.basis,hand.palm_position)
+    # hand_tf=make_kdl_frame(hand.basis,hand.palm_position)
     hand_dict[hand_name]=["hand_ground",hand_tf]
     for finger in hand.fingers:
         finger_name=hand_name+"_"+finger_names[finger.type()]
@@ -83,11 +79,8 @@ def make_tf_dict(hand,hand_name):
         tip=PyKDL.Frame(PyKDL.Rotation(1,0,0, 0,1,0, 0,0,1),PyKDL.Vector(0,0,-bone.length/1000.0))
         hand_dict[finger_name+"_tip"]=[prev_bone_name,tip]    
     return hand_dict    
-     #now sending to ROS       
+     # now sending to ROS       
         
-
-
-###
 
 def broadcast_hand(hand,hand_name,timenow):
     hand_dict=make_tf_dict(hand,hand_name)
@@ -104,7 +97,7 @@ def sender():
     li.setDaemon(True)
     li.start()
     # pub     = rospy.Publisher('leapmotion/raw',leap)
-    #pub_ros   = rospy.Publisher('leapmotion/data',leapros)
+    # pub_ros   = rospy.Publisher('leapmotion/data',leapros)
     rospy.init_node('leap_skeleton_pub')
 
     
@@ -115,7 +108,7 @@ def sender():
         if li.listener.right_hand:
             broadcast_hand(li.listener.right_hand,"right_hand",timenow)
 
-        # Save some CPU time, circa 100Hz publishing.
+        # save some CPU time, circa 100Hz publishing.
         rospy.sleep(0.01)
 
 
