@@ -9,6 +9,8 @@
 
   <license>BSD</license>
   <url type="website">https://wiki.ros.org/leap_motion</url>
+  <url type="repository">https://github.com/ros-drivers/leap_motion</url>
+  <url type="bugtracker">https://github.com/ros-drivers/leap_motion/issues</url>
   <author email="flier@techfak.uni-bielefeld.de">Florian Lier</author>
 
   <buildtool_depend>catkin</buildtool_depend>
