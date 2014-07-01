@@ -17,10 +17,13 @@
 import sys
 import time
 # Set (append) your PYTHONPATH properly, or just fill in the location of your LEAP
-# SDK folder, e.g., ../LeapSDK/lib where the Leap.py lives and /LeapSDK/lib/x64 or
+# SDK folder, e.g., $HOME/LeapSDK/lib where the Leap.py lives and /LeapSDK/lib/x64 or
 # x86 where the *.so files reside.
-sys.path.append("/homes/flier/Projects/Ongoing/Leap_Developer/LeapSDK/lib")
-sys.path.append("/homes/flier/Projects/Ongoing/Leap_Developer/LeapSDK/lib/x64")
+
+# Below, you can see the "dirty" version - NOT RECOMMENDED!
+
+# sys.path.append("/home/YOUR_NAME/path/to/Leap_Developer/LeapSDK/lib")
+# sys.path.append("/home/YOUR_NAME/path/to/Leap_Developer/Leap_Developer/LeapSDK/lib/x64")
 import threading
 import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
@@ -31,6 +34,8 @@ class LeapInterface(Leap.Listener):
         # These variables as probably not thread safe
         # TODO: Make thread safe ;)
         self.hand           = [0,0,0]
+        self.right_hand = False
+        self.left_hand = False
         self.hand_direction = [0,0,0]
         self.hand_normal    = [0,0,0]
         self.hand_palm_pos  = [0,0,0]
@@ -62,9 +67,31 @@ class LeapInterface(Leap.Listener):
         print "Frame id: %d, timestamp: %d, hands: %d, fingers: %d, tools: %d, gestures: %d" % (
               frame.id, frame.timestamp, len(frame.hands), len(frame.fingers), len(frame.tools), len(frame.gestures()))
 
-        if not frame.hands.empty:
+        if not frame.hands.is_empty: #recently changed in API
             # Get the first hand
-            self.hand = frame.hands[0]
+            
+            
+            #we are seeking one left and one right hands
+            there_is_right_hand=False
+            there_is_left_hand=False
+            
+            for hand in frame.hands:
+            
+                if hand.is_right:
+                    there_is_right_hand=True
+                    self.right_hand=hand
+                elif hand.is_left:
+                    there_is_left_hand=True
+                    
+                    self.left_hand=hand
+            
+            if not there_is_right_hand:
+                self.right_hand=False
+            
+            if not there_is_left_hand:
+                self.left_hand=False
+                        
+            self.hand = frame.hands[0] #old way
 
             # Check if the hand has any fingers
             #fingers = self.hand.fingers
