@@ -1,0 +1,6 @@
+<launch>
+  <group ns="leap_motion">
+    <node pkg="leap_motion" type="leap_camera" name="leap_camera" output="screen"/>
+    <node pkg="leap_motion" type="leap_hands" name="leap_hands" output="screen"/>
+  </group>
+</launch>

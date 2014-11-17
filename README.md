@@ -59,3 +59,21 @@ Remember that you will need to have your path set at least in the "sender" shell
 7. source ~/catkin_ws/devel/setup.bash && rosrun leap_motion subscriber.py (another shell) 
 
 8. You are done, you should see the LEAP MOTION coordinates in your shell prompt
+
+
+USE LEAP AS STEREO CAMERA
+=======
+if you want to use leap_motion as stereo_camera, You can use by compiling it.
+
+1. Make sure that You are using LeapSDK ver 2.*
+
+2. You need to append the location of your LeapSDK (especially /lib and /lib/x64 or x86) to your LEAP_SDK_PATH,e.g., add "export LEAP_SDK=/home/Your_name/LeapDebeloperKit_2.*/LeapSDK " in ~/.bashrc
+
+3. command LeapControlPanel in your shell and enable the feature in the Leap Motion control panel for any application to get the raw camera images.
+
+4. in your catkin_ws, catkin_make --only-pkg-with-depth leap_motion
+
+5. roslaunch leap_motion leap_camera.launch
+
+6. roslaunch leap_motion leap_stereo.launch
+
