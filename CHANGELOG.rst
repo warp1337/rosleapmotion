@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.5 (2014-11-17)
+------------------
 * Enhancements for skeleton/finger tf frame publishing as well as code cleanup
 * Code cleanup
 * skeleton sender added
