@@ -6,6 +6,7 @@
 
   <maintainer email="flier@techfak.uni-bielefeld.de">Florian Lier</maintainer>
   <maintainer email="mas644@gmail.com">Mirza Shah</maintainer>
+  <maintainer email="iiysaito@opensource-robotics.tokyo.jp">Isaac IY Saito</maintainer>
 
   <license>BSD</license>
   <url type="website">https://wiki.ros.org/leap_motion</url>
