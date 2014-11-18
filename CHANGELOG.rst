@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.6 (2014-11-18)
+------------------
 * Fix typo in dependency. `#5 <https://github.com/ros-drivers/leap_motion/issues/5>`_ from 130s/typo_dependency
 * Contributors: Isaac IY Saito
 
