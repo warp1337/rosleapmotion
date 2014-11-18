@@ -39,7 +39,7 @@ hand.roll
 
 
 INSTALLATION
-=======
+==============
 
 1. If you don't already have a catkin workspace, please follow these instructions before starting with 2.: http://www.ros.org/wiki/catkin/Tutorials/create_a_workspace
 
@@ -62,7 +62,7 @@ Remember that you will need to have your path set at least in the "sender" shell
 
 
 USE LEAP AS STEREO CAMERA
-=======
+============================
 if you want to use leap_motion as stereo_camera, You can use by compiling it.
 
 1. Make sure that You are using LeapSDK ver 2.*
