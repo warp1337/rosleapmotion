@@ -2,6 +2,11 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix typo in dependency. `#5 <https://github.com/ros-drivers/leap_motion/issues/5>`_ from 130s/typo_dependency
+* Contributors: Isaac IY Saito
+
 0.0.5 (2014-11-17)
 ------------------
 * Enhancements for skeleton/finger tf frame publishing as well as code cleanup
