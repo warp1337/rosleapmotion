@@ -32,7 +32,7 @@ catkin_package(
 
 include_directories(include
   ${catkin_INCLUDE_DIRS}
-  $ENV{LEAP_SDK}/include
+  if($ENV{LEAP_SDK} $ENV{LEAP_SDK}/include)
 )
 
 install(PROGRAMS
@@ -40,14 +40,14 @@ install(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-add_executable(leap_camera src/leap_camera.cpp)
- 
-target_link_libraries(leap_camera
-  ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
+if($ENV{LEAP_SDK})
+  add_executable(leap_camera src/leap_camera.cpp)
+  target_link_libraries(leap_camera
+    ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
   )
 
-add_executable(leap_hands src/leap_hands.cpp)
- 
-target_link_libraries(leap_hands
-  ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  add_executable(leap_hands src/leap_hands.cpp)
+  target_link_libraries(leap_hands
+    ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
   )
+endif()
