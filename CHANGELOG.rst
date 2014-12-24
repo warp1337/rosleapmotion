@@ -2,6 +2,11 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Build some binaries only when SDK is installed (Fix to https://github.com/ros-drivers/leap_motion/issues/7).
+* Contributors: Isaac I.Y. Saito, Yu Ohara
+
 0.0.6 (2014-11-18)
 ------------------
 * Fix typo in dependency. `#5 <https://github.com/ros-drivers/leap_motion/issues/5>`_ from 130s/typo_dependency
