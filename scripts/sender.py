@@ -1,12 +1,24 @@
 #!/usr/bin/env python
 __author__ = 'flier'
+
+import argparse
+
 import rospy
 import leap_interface
 from leap_motion.msg import leap
 from leap_motion.msg import leapros
 
+FREQUENCY_ROSTOPIC_DEFAULT = 0.01
+PARAMNAME_FREQ = '/leapmotion/freq'
+
 # Obviously, this method publishes the data defined in leapros.msg to /leapmotion/data
-def sender():
+def sender(freq=FREQUENCY_ROSTOPIC_DEFAULT):
+    '''
+    @param freq: Frequency to publish sensed info as ROS message
+    '''
+    rospy.set_param(PARAMNAME_FREQ, freq)
+    rospy.loginfo("Parameter set on server: PARAMNAME_FREQ={}, freq={}".format(rospy.get_param(PARAMNAME_FREQ, FREQUENCY_ROSTOPIC_DEFAULT), freq))
+
     li = leap_interface.Runner()
     li.setDaemon(True)
     li.start()
@@ -37,12 +49,16 @@ def sender():
         # We don't publish native data types, see ROS best practices
         # pub.publish(hand_direction=hand_direction_,hand_normal = hand_normal_, hand_palm_pos = hand_palm_pos_, hand_pitch = hand_pitch_, hand_roll = hand_roll_, hand_yaw = hand_yaw_)
         pub_ros.publish(msg)
-        # Save some CPU time, circa 100Hz publishing.
-        rospy.sleep(0.01)
+        rospy.sleep(rospy.get_param(PARAMNAME_FREQ, FREQUENCY_ROSTOPIC_DEFAULT))
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='LeapMotion ROS driver. Message Sender module to ROS world using LeapSDK.')
+    parser.add_argument('--freq', help='Frequency to publish sensed info as ROS message', type=float)
+    args, unknown = parser.parse_known_args()
+    if not args.freq:
+        args.freq = FREQUENCY_ROSTOPIC_DEFAULT
     try:
-        sender()
+        sender(args.freq)
     except rospy.ROSInterruptException:
         pass
