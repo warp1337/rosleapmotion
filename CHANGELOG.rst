@@ -2,6 +2,12 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* (Feature) Take ROS msg publish frequency from commandline, set it to Parameter Server
+* (Maintenance) Add unittest structure.
+* Contributors: Isaac I.Y. Saito
+
 0.0.7 (2014-12-24)
 ------------------
 * Build some binaries only when SDK is installed (Fix to https://github.com/ros-drivers/leap_motion/issues/7).
