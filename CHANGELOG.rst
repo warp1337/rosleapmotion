@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.8 (2015-04-30)
+------------------
 * (Feature) Take ROS msg publish frequency from commandline, set it to Parameter Server
 * (Maintenance) Add unittest structure.
 * Contributors: Isaac I.Y. Saito
