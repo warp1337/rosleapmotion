@@ -33,7 +33,7 @@ def sender(freq=FREQUENCY_ROSTOPIC_DEFAULT):
         hand_pitch_       = li.get_hand_pitch()
         hand_roll_        = li.get_hand_roll()
         hand_yaw_         = li.get_hand_yaw()
-        test_             = li.get_test()
+
         msg = leapros()
         msg.direction.x = hand_direction_[0]
         msg.direction.y = hand_direction_[1]
@@ -47,9 +47,17 @@ def sender(freq=FREQUENCY_ROSTOPIC_DEFAULT):
         msg.ypr.x = hand_yaw_
         msg.ypr.y = hand_pitch_
         msg.ypr.z = hand_roll_
-        msg.test.x = test_[0]
-        msg.test.y = test_[1]
-        msg.test.z = test_[2]
+
+        fingerNames = ['thumb', 'index', 'middle', 'ring', 'pinky']
+        fingerPointNames = ['metacarpal', 'proximal',
+                            'intermediate', 'distal', 'tip']
+        for fingerName in fingerNames:
+            for fingerPointName in fingerPointNames:
+                pos = li.get_finger_point(fingerName, fingerPointName)
+                for iDim, dimName in enumerate(['x', 'y', 'z']):
+                    setattr(getattr(msg, '%s_%s' % (fingerName, fingerPointName)),
+                            dimName, pos[iDim])
+
         # We don't publish native data types, see ROS best practices
         # pub.publish(hand_direction=hand_direction_,hand_normal = hand_normal_, hand_palm_pos = hand_palm_pos_, hand_pitch = hand_pitch_, hand_roll = hand_roll_, hand_yaw = hand_yaw_)
         pub_ros.publish(msg)

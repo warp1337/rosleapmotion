@@ -72,7 +72,6 @@ class LeapInterface(Leap.Listener):
         self.fingerNames = ['thumb', 'index', 'middle', 'ring', 'pinky']
         for fingerName in self.fingerNames:
             setattr(self, fingerName, LeapFinger())
-        self.test           = [1,2,3]
         print "Initialized Leap Motion Device"
 
     def on_connect(self, controller):
@@ -132,7 +131,6 @@ class LeapInterface(Leap.Listener):
                     #self.thumb.importFinger(finger)
                     finger = fingers.finger_type(getattr(Leap.Finger, 'TYPE_%s' % fingerName.upper()))[0]
                     getattr(self, fingerName).importFinger(finger)
-                self.test = self.thumb.tip
 
             # Get the hand's sphere radius and palm position
             # print "Hand sphere radius: %f mm, palm position: %s" % (self.hand.sphere_radius, hand.palm_position)
@@ -233,8 +231,8 @@ class LeapInterface(Leap.Listener):
     def get_hand_roll(self):
         return self.hand_roll
 
-    def get_test(self):
-        return self.test
+    def get_finger_point(self, fingerName, fingerPointName):
+        return getattr(getattr(self, fingerName), fingerPointName)
 
 
 class Runner(threading.Thread):
@@ -267,8 +265,8 @@ class Runner(threading.Thread):
     def get_hand_yaw(self):
         return self.listener.get_hand_yaw()
 
-    def get_test(self):
-        return self.listener.get_test()
+    def get_finger_point(self, fingerName, fingerPointName):
+        return self.listener.get_finger_point(fingerName, fingerPointName)
 
     def run (self):
         while True:
