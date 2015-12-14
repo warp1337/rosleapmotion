@@ -9,22 +9,22 @@ from leap_motion.msg import leap
 from leap_motion.msg import leapros
 
 FREQUENCY_ROSTOPIC_DEFAULT = 0.01
-PARAMNAME_FREQ = '/leapmotion/freq'
+NODENAME = 'leap_pub'
+PARAMNAME_FREQ = 'freq'
+PARAMNAME_FREQ_ENTIRE = '/' + NODENAME + '/' + PARAMNAME_FREQ
 
-# Obviously, this method publishes the data defined in leapros.msg to /leapmotion/data
-def sender(freq=FREQUENCY_ROSTOPIC_DEFAULT):
+def sender():
     '''
-    @param freq: Frequency to publish sensed info as ROS message
+    This method publishes the data defined in leapros.msg to /leapmotion/data
     '''
-    rospy.set_param(PARAMNAME_FREQ, freq)
-    rospy.loginfo("Parameter set on server: PARAMNAME_FREQ={}, freq={}".format(rospy.get_param(PARAMNAME_FREQ, FREQUENCY_ROSTOPIC_DEFAULT), freq))
+    rospy.loginfo("Parameter set on server: PARAMNAME_FREQ={}".format(rospy.get_param(PARAMNAME_FREQ_ENTIRE, FREQUENCY_ROSTOPIC_DEFAULT)))
 
     li = leap_interface.Runner()
     li.setDaemon(True)
     li.start()
     # pub     = rospy.Publisher('leapmotion/raw',leap)
     pub_ros   = rospy.Publisher('leapmotion/data',leapros)
-    rospy.init_node('leap_pub')
+    rospy.init_node(NODENAME)
 
     while not rospy.is_shutdown():
         hand_direction_   = li.get_hand_direction()
@@ -61,16 +61,11 @@ def sender(freq=FREQUENCY_ROSTOPIC_DEFAULT):
         # We don't publish native data types, see ROS best practices
         # pub.publish(hand_direction=hand_direction_,hand_normal = hand_normal_, hand_palm_pos = hand_palm_pos_, hand_pitch = hand_pitch_, hand_roll = hand_roll_, hand_yaw = hand_yaw_)
         pub_ros.publish(msg)
-        rospy.sleep(rospy.get_param(PARAMNAME_FREQ, FREQUENCY_ROSTOPIC_DEFAULT))
+        rospy.sleep(rospy.get_param(PARAMNAME_FREQ_ENTIRE, FREQUENCY_ROSTOPIC_DEFAULT))
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='LeapMotion ROS driver. Message Sender module to ROS world using LeapSDK.')
-    parser.add_argument('--freq', help='Frequency to publish sensed info as ROS message', type=float)
-    args, unknown = parser.parse_known_args()
-    if not args.freq:
-        args.freq = FREQUENCY_ROSTOPIC_DEFAULT
     try:
-        sender(args.freq)
+        sender()
     except rospy.ROSInterruptException:
         pass
