@@ -2,6 +2,13 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [feat] Added individual coordinates for each finger bone (`#23 <https://github.com/ros-drivers/leap_motion/issues/23>`_)
+* [feat] Better way of parameter declaration (`#17 <https://github.com/ros-drivers/leap_motion/issues/17>`_)
+* [sys] Update travis conf to Ubuntu Trusty and ROS I-J (`#22 <https://github.com/ros-drivers/leap_motion/issues/22>`_)
+* Contributors: Isaac I.Y. Saito, Tu-Hoa Pham
+
 0.0.8 (2015-04-30)
 ------------------
 * (Feature) Take ROS msg publish frequency from commandline, set it to Parameter Server
