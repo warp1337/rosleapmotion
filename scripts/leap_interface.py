@@ -28,6 +28,33 @@ import threading
 import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
+class LeapFinger():
+    def __init__(self, finger=None):
+        self.boneNames = ['metacarpal',
+                          'proximal',
+                          'intermediate',
+                          'distal']
+        for boneName in self.boneNames:
+            setattr(self, boneName, [0.0, 0.0, 0.0])
+        self.tip = [0.0, 0.0, 0.0]
+
+        self.leapBoneNames = [Leap.Bone.TYPE_METACARPAL,
+                              Leap.Bone.TYPE_PROXIMAL,
+                              Leap.Bone.TYPE_INTERMEDIATE,
+                              Leap.Bone.TYPE_DISTAL]
+
+        if finger is not None:
+            self.importFinger(finger)
+
+    def importFinger(self, finger):
+        for boneName in self.boneNames:
+            # Get the base of each bone
+            bone = finger.bone(getattr(Leap.Bone, 'TYPE_%s' % boneName.upper()))
+            setattr(self, boneName, bone.prev_joint.to_float_array())
+        # For the tip, get the end of the distal bone
+        self.tip = finger.bone(Leap.Bone.TYPE_DISTAL).next_joint.to_float_array()
+
+
 
 class LeapInterface(Leap.Listener):
     def on_init(self, controller):
@@ -42,6 +69,9 @@ class LeapInterface(Leap.Listener):
         self.hand_pitch     = 0.0
         self.hand_yaw       = 0.0
         self.hand_roll      = 0.0
+        self.fingerNames = ['thumb', 'index', 'middle', 'ring', 'pinky']
+        for fingerName in self.fingerNames:
+            setattr(self, fingerName, LeapFinger())
         print "Initialized Leap Motion Device"
 
     def on_connect(self, controller):
@@ -69,39 +99,38 @@ class LeapInterface(Leap.Listener):
 
         if not frame.hands.is_empty: #recently changed in API
             # Get the first hand
-            
-            
+
+
             #we are seeking one left and one right hands
             there_is_right_hand=False
             there_is_left_hand=False
-            
+
             for hand in frame.hands:
-            
+
                 if hand.is_right:
                     there_is_right_hand=True
                     self.right_hand=hand
                 elif hand.is_left:
                     there_is_left_hand=True
-                    
+
                     self.left_hand=hand
-            
+
             if not there_is_right_hand:
                 self.right_hand=False
-            
+
             if not there_is_left_hand:
                 self.left_hand=False
-                        
+
             self.hand = frame.hands[0] #old way
 
             # Check if the hand has any fingers
-            #fingers = self.hand.fingers
-            #if not fingers.empty:
-                # Calculate the hand's average finger tip position
-                #avg_pos = Leap.Vector()
-                #for finger in fingers:
-                    #avg_pos += finger.tip_position
-                # avg_pos /= len(fingers)
-                # print "Hand has %d fingers, average finger tip position: %s" % (len(fingers), avg_pos)
+            fingers = self.hand.fingers
+            if not fingers.is_empty:
+                for fingerName in self.fingerNames:
+                    #finger = fingers.finger_type(Leap.Finger.TYPE_THUMB)[0]
+                    #self.thumb.importFinger(finger)
+                    finger = fingers.finger_type(getattr(Leap.Finger, 'TYPE_%s' % fingerName.upper()))[0]
+                    getattr(self, fingerName).importFinger(finger)
 
             # Get the hand's sphere radius and palm position
             # print "Hand sphere radius: %f mm, palm position: %s" % (self.hand.sphere_radius, hand.palm_position)
@@ -202,6 +231,9 @@ class LeapInterface(Leap.Listener):
     def get_hand_roll(self):
         return self.hand_roll
 
+    def get_finger_point(self, fingerName, fingerPointName):
+        return getattr(getattr(self, fingerName), fingerPointName)
+
 
 class Runner(threading.Thread):
 
@@ -211,7 +243,7 @@ class Runner(threading.Thread):
         self.listener = LeapInterface()
         self.controller = Leap.Controller()
         self.controller.add_listener(self.listener)
-    
+
     def __del__(self):
         self.controller.remove_listener(self.listener)
 
@@ -232,6 +264,9 @@ class Runner(threading.Thread):
 
     def get_hand_yaw(self):
         return self.listener.get_hand_yaw()
+
+    def get_finger_point(self, fingerName, fingerPointName):
+        return self.listener.get_finger_point(fingerName, fingerPointName)
 
     def run (self):
         while True:

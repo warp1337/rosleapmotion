@@ -37,6 +37,21 @@ hand.pitch
 hand.yaw
 hand.roll
 
+For each finger in [‘thumb’, ‘index’, ‘middle’, ‘ring’, ‘pinky’], the coordinates of each bone in [‘metacarpal’, ‘proximal’, ‘intermediate’, ‘distal’] are available as finger_bone (e.g., thumb_metacarpal).
+
+(Point)
+finger_bone.x
+finger_bone.y
+finger_bone.z
+
+These coordinates are taken at the base of each bone (closest to the wrist). To access the end of the distal bone, use finger_tip (e.g., thumb_tip).
+
+(Point)
+finger_tip.x
+finger_tip.y
+finger_tip.z
+
+
 
 INSTALLATION
 ==============
