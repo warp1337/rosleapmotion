@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.9 (2015-12-14)
+------------------
 * [feat] Added individual coordinates for each finger bone (`#23 <https://github.com/ros-drivers/leap_motion/issues/23>`_)
 * [feat] Better way of parameter declaration (`#17 <https://github.com/ros-drivers/leap_motion/issues/17>`_)
 * [sys] Update travis conf to Ubuntu Trusty and ROS I-J (`#22 <https://github.com/ros-drivers/leap_motion/issues/22>`_)
