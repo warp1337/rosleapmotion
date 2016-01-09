@@ -1,51 +1,29 @@
-#   Original Author: William Woodall, Mani Monajjemi
-sudo: required
-dist: trusty
-# Force travis to use its minimal image with default Python settings
-language: generic
+sudo: required 
+dist: trusty 
+language: generic 
 compiler:
   - gcc
-env:
-  global:
-    - CATKIN_WS=~/catkin_ws
-    - CATKIN_WS_SRC=${CATKIN_WS}/src
-  matrix:
-    - ROS_DISTRO="indigo" DEB_REPOSITORY=http://packages.ros.org/ros/ubuntu
-    - ROS_DISTRO="indigo" DEB_REPOSITORY=http://packages.ros.org/ros-shadow-fixed/ubuntu
-    - ROS_DISTRO="jade" DEB_REPOSITORY=http://packages.ros.org/ros/ubuntu
-    - ROS_DISTRO="jade" DEB_REPOSITORY=http://packages.ros.org/ros-shadow-fixed/ubuntu
-matrix:
-  allow_failures:
-    - env: USE_DEB=true  ROS_DISTRO="jade"   DEB_REPOSITORY=http://packages.ros.org/ros/ubuntu
-    - env: USE_DEB=true  ROS_DISTRO="jade"   DEB_REPOSITORY=http://packages.ros.org/ros-shadow-fixed/ubuntu
 notifications:
   email:
-    recipients:
-      - 130s@2000.jukuin.keio.ac.jp
-    on_success: always #[always|never|change] # default: change
-    on_failure: always #[always|never|change] # default: always
+    on_success: always
+    on_failure: always
+#    recipients:
+#      - jane@doe
+env:
+  matrix:
+    - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - USE_DEB=false  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - USE_DEB=false  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - USE_DEB=true  ROS_DISTRO="jade"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - USE_DEB=true  ROS_DISTRO="jade"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+matrix:
+  allow_failures:
+    - env: USE_DEB=false  ROS_DISTRO="indigo"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - env: USE_DEB=false  ROS_DISTRO="indigo"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - env: USE_DEB=true  ROS_DISTRO="jade"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
+    - env: USE_DEB=true  ROS_DISTRO="jade"   ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu NOT_TEST_BUILD='true' NOT_TEST_INSTALL='true'
 install:
-  - sudo sh -c "echo \"deb ${DEB_REPOSITORY} `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
-  - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq -y python-rosdep python-catkin-tools
-  - sudo rosdep init
-  - rosdep update
-  # Use rosdep to install all dependencies (including ROS itself)
-  - rosdep install --from-paths ./ -i -y --rosdistro $ROS_DISTRO
-script:
-  - source /opt/ros/$ROS_DISTRO/setup.bash
-  - mkdir -p $CATKIN_WS_SRC
-  - ln -s $TRAVIS_BUILD_DIR $CATKIN_WS_SRC
-  - cd $CATKIN_WS
-  - catkin init
-  # Enable install space
-  - catkin config --install
-  # Build [and Install] packages
-  - catkin build --no-status --no-notify -DCMAKE_BUILD_TYPE=Release
-  # Build tests
-  - catkin build --no-status --no-notify --make-args tests
-  # Run tests
-  - catkin run_tests
-  # check test (this only works from indigo onward)
-  - catkin_test_results build
+  - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
+script: 
+  - source .ci_config/travis.sh

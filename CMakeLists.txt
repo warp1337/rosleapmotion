@@ -51,3 +51,8 @@ if($ENV{LEAP_SDK})
     ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
   )
 endif()
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest(test/test_leap_motion.test test/test_sender.test)
+endif()
