@@ -2,6 +2,13 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [fix][sys] launch and camera_info directory should be installed
+  [fix][sys] a bug of the check method of LEAP_SDK environment value `#27 <https://github.com/ros-drivers/leap_motion/issues/28>`_
+* [sys] Add tests `#25 <https://github.com/ros-drivers/leap_motion/issues/25>`_
+* Contributors: Kenta Yonekura, Isaac I.Y. Saito
+
 0.0.9 (2015-12-14)
 ------------------
 * [feat] Added individual coordinates for each finger bone (`#23 <https://github.com/ros-drivers/leap_motion/issues/23>`_)
