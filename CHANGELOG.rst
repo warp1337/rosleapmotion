@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.10 (2016-06-18)
+-------------------
 * [fix][sys] launch and camera_info directory should be installed
   [fix][sys] a bug of the check method of LEAP_SDK environment value `#27 <https://github.com/ros-drivers/leap_motion/issues/28>`_
 * [sys] Add tests `#25 <https://github.com/ros-drivers/leap_motion/issues/25>`_
