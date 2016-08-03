@@ -23,7 +23,7 @@ def sender():
     li.setDaemon(True)
     li.start()
     # pub     = rospy.Publisher('leapmotion/raw',leap)
-    pub_ros   = rospy.Publisher('leapmotion/data',leapros)
+    pub_ros   = rospy.Publisher('leapmotion/data',leapros, queue_size=2)
     rospy.init_node(NODENAME)
 
     while not rospy.is_shutdown():
