@@ -2,6 +2,11 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [fix] ROS Hydro onward requires queue_size option `#31 <https://github.com/ros-drivers/leap_motion/issues/31>`_
+* Contributors: Kei Okada
+
 0.0.10 (2016-06-18)
 -------------------
 * [fix][sys] launch and camera_info directory should be installed
