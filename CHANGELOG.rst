@@ -2,8 +2,8 @@
 Changelog for package leap_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.11 (2017-01-14)
+-------------------
 * [fix] ROS Hydro onward requires queue_size option `#31 <https://github.com/ros-drivers/leap_motion/issues/31>`_
 * Contributors: Kei Okada
 
