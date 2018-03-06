@@ -7,6 +7,6 @@
   <arg name="freq_limit" default="50" />
 
   <node name="sender_freq" 
-        pkg="lmc_ros_driver" type="sender.py" args="$(arg freq_prefix):=$(arg freq_value)" />
+        pkg="leap_motion" type="sender.py" args="$(arg freq_prefix):=$(arg freq_value)" />
 
 </launch>
