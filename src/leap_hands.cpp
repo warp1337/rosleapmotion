@@ -7,6 +7,9 @@
 
 #include <sstream>
 
+/* ##################################################
+    Deprecated and will be removed in the future  
+################################################## */
 
 using namespace Leap;
 using namespace std;
@@ -90,21 +93,21 @@ void HandsListener::onFrame(const Controller& controller) {
       for (int b = 0; b < 4; ++b) {
         Bone::Type boneType = static_cast<Bone::Type>(b);
         Bone bone = finger.bone(boneType);
-	geometry_msgs::Point point;
-	point.x = -bone.prevJoint().x/1000;
-	point.y = bone.prevJoint().z/1000;
-	point.z = bone.prevJoint().y/1000;
-	marker_msg.points.push_back(point);
-	point.x = joint_msg.pose.position.x =  -bone.nextJoint().x/1000;
-	point.y = joint_msg.pose.position.y = bone.nextJoint().z/1000;
-	point.z = joint_msg.pose.position.z = bone.nextJoint().y/1000;
-	marker_msg.points.push_back(point);
-	joint_msg.id = joint_msg.id+1;
-	marker_array_msg.markers.push_back(joint_msg);
-	std_msgs::ColorRGBA color;
-	color.r = 1.0f; color.g=.0f; color.b=.0f, color.a=1.0f;
-	marker_msg.colors.push_back(color);
-	marker_msg.colors.push_back(color);
+        geometry_msgs::Point point;
+        point.x = -bone.prevJoint().x/1000;
+        point.y = bone.prevJoint().z/1000;
+        point.z = bone.prevJoint().y/1000;
+        marker_msg.points.push_back(point);
+        point.x = joint_msg.pose.position.x =  -bone.nextJoint().x/1000;
+        point.y = joint_msg.pose.position.y = bone.nextJoint().z/1000;
+        point.z = joint_msg.pose.position.z = bone.nextJoint().y/1000;
+        marker_msg.points.push_back(point);
+        joint_msg.id = joint_msg.id+1;
+        marker_array_msg.markers.push_back(joint_msg);
+        std_msgs::ColorRGBA color;
+        color.r = 1.0f; color.g=.0f; color.b=.0f, color.a=1.0f;
+        marker_msg.colors.push_back(color);
+        marker_msg.colors.push_back(color);
       }
     }
   }

@@ -1,3 +1,7 @@
+##################################################
+## Deprecated and will be removed in the future ##
+##################################################
+
 Header header
 
 float64[3] hand_direction
