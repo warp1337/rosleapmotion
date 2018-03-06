@@ -1,4 +1,4 @@
-# LMC-ROS-Driver
+# ROS LEAP MOTION
 
 ROS driver for the Leap Motion Controller
 
@@ -8,13 +8,15 @@ You should have [ROS Kinetic](http://wiki.ros.org/kinetic) or a [newer version](
 
 ## FEATURES
 
-Currently, this ROS package supports one person (left and right arm), publishing raw camera images from the controller, basic visualization using Rviz and a pointcloud2 generated from [stereo_image_proc](http://wiki.ros.org/stereo_image_proc).
+Currently, this ROS package supports one person (left and right arm), publishing raw camera images from the controller, basic visualization using RViz and a pointcloud2 generated from [stereo_image_proc](http://wiki.ros.org/stereo_image_proc) node.
 
 There is also a filter node implementing a 2nd-order Butterworth lowpass filter that is used to filter the hand x, y, z coordinates coming from the Leap Controller via Human.msg. For more information refer to Julius O. Smith III, Intro to Digital Filters with Audio Applications.
 
 ## INSTALLATION
 
-**1.** You need to append the location of your LeapSDK to your environment variables. The LeapSDK folder should contain the following files: include/Leap.h, include/LeapMath.h, lib/x64/libLeap.so and lib/x86/libLeap.so. This step differs depending on where you saved the SDK. Example:
+**1.** You need to append the location of your LeapSDK to your environment variables. This step differs depending on where you saved the SDK. The LeapSDK folder should contain the following files: include/Leap.h, include/LeapMath.h, lib/x64/libLeap.so and lib/x86/libLeap.so.
+
+Example:
 
 ```bash
 export LEAP_SDK=~/lib/LeapSDK
@@ -26,7 +28,7 @@ export LEAP_SDK=~/lib/LeapSDK
 
 ```bash
     cd ~/catkin_ws/src
-    git clone https://github.com/ut-ims-robotics/lmc_ros_driver.git
+    git clone https://github.com/ros-drivers/leap_motion.git
     cd ~/catkin_ws
     catkin_make
 ```
@@ -37,7 +39,7 @@ export LEAP_SDK=~/lib/LeapSDK
 LeapControlPanel
 ```
 
-**5.** (OPTIONAL) If it gives you an error about the leap daemon not running, stop the leap control panel and use the following command:
+**5.** (OPTIONAL) If it gives you an error about the leap daemon not running, stop the LeapControlPanel and use the following command:
 
 ```bash
 sudo service leapd restart
@@ -49,14 +51,10 @@ sudo service leapd restart
 source ~/catkin_ws/devel/setup.bash
 ```
 
-**7.** Launch the demo.launch file to see if you have set everything up correctly. If you wish to enable a lowpass filter append enable_filter:=1 to the end of the command.
+**7.** Launch the demo.launch file to see if you have set everything up correctly. If you wish to enable a lowpass filter change "enable_filter" to true in filter_params.yaml file.
 
 ```bash
-roslaunch lmc_ros_driver demo.launch
+roslaunch leap_motion everything.launch
 ```
 
-```bash
-roslaunch lmc_ros_driver demo.launch enable_filter:=1
-```
-
-**8.** You are done! You should see an Rviz window opening up displaying the detected hands from the controller.
+**8.** You are done! You should see an RViz window opening up displaying the detected hands from the controller.
