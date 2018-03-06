@@ -1,0 +1,18 @@
+<launch>
+
+    <!-- Load the listener parameters and start the driver node -->
+    <rosparam file="$(find leap_motion)/config/listener_params.yaml" command="load" />
+    <node pkg="leap_motion" type="leap_motion_driver_node" name="leap_driver" output="screen" />
+    
+    <!-- Start the visualization node and make a tf so ROS and Leap orientations are the same-->
+    <node pkg="leap_motion" type="leap_motion_visualizer_node" name="leap_visualizer" output="screen" />
+    <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0.707 0 0 0.707 world leap_hands 100" />
+
+    <!-- Load the filter parameters and start the filter node -->
+    <rosparam file="$(find leap_motion)/config/filter_params.yaml" command="load" />
+    <node pkg="leap_motion" type="leap_motion_filter_node" name="leap_filter" output="screen" />
+   
+    <!-- Open a preconfigured RViz window -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find leap_motion)/config/RViz/leap_visualization.rviz" />
+
+</launch>

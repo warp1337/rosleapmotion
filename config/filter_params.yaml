@@ -1,0 +1,6 @@
+# Related to the cutoff frequency of the filter.
+# c = 1 results in a cutoff at 1/4 of the sampling rate.
+# See bitbucket.org/AndyZe/pid if you want to get more sophisticated.
+# Larger c --> trust the filtered data more, trust the measurements less.
+filter_cutoff: 4.0
+enable_filter: true
