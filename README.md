@@ -1,96 +1,62 @@
-ROS LEAP MOTION
-=============
+# LMC-ROS-Driver
 
-Leap Motion ROS integration
+ROS driver for the Leap Motion Controller
 
+## REQUIREMENTS
 
-REQUIREMENTS
-============
+You should have [ROS Kinetic](http://wiki.ros.org/kinetic) or a [newer version](http://wiki.ros.org/Distributions) installed on your device and the [Leap Motion SDK](https://developer.leapmotion.com/sdk/v2) for Linux.
 
-ROS Groovy installed including rospy and geometry_msg and the LEAP MOTION SDK for Linux
+## FEATURES
 
+Currently, this ROS package supports one person (left and right arm), publishing raw camera images from the controller, basic visualization using Rviz and a pointcloud2 generated from [stereo_image_proc](http://wiki.ros.org/stereo_image_proc).
 
-FEATURES
-========
+There is also a filter node implementing a 2nd-order Butterworth lowpass filter that is used to filter the hand x, y, z coordinates coming from the Leap Controller via Human.msg. For more information refer to Julius O. Smith III, Intro to Digital Filters with Audio Applications.
 
-Release 0.0.1 Includes:
+## INSTALLATION
 
-Currently, this ros package features the extraction of one hand, the first to be recognized by the LEAP DEVICE.
+**1.** You need to append the location of your LeapSDK to your environment variables. The LeapSDK folder should contain the following files: include/Leap.h, include/LeapMath.h, lib/x64/libLeap.so and lib/x86/libLeap.so. This step differs depending on where you saved the SDK. Example:
 
-(Vector3)
-direction.x
-direction.y
-direction.z
+```bash
+export LEAP_SDK=~/lib/LeapSDK
+```
 
-(Vector3)
-normal.x
-normal.y
-normal.z
+**2.** (OPTIONAL) You can edit your ~/.bashrc file to remove the need to export the location of your LeapSDK every time you open a new shell. Just append the LeapSDK location to the end of the file.
 
-(Point)
-pos.x
-pos.y
-pos.z
+**3.** Go to the src folder of your catkin workspace.
 
-(Vector3)
-hand.pitch
-hand.yaw
-hand.roll
+```bash
+    cd ~/catkin_ws/src
+    git clone https://github.com/ut-ims-robotics/lmc_ros_driver.git
+    cd ~/catkin_ws
+    catkin_make
+```
 
-For each finger in [‘thumb’, ‘index’, ‘middle’, ‘ring’, ‘pinky’], the coordinates of each bone in [‘metacarpal’, ‘proximal’, ‘intermediate’, ‘distal’] are available as finger_bone (e.g., thumb_metacarpal).
+**4.** Start the Leap control panel in another terminal.
 
-(Point)
-finger_bone.x
-finger_bone.y
-finger_bone.z
+```bash
+LeapControlPanel
+```
 
-These coordinates are taken at the base of each bone (closest to the wrist). To access the end of the distal bone, use finger_tip (e.g., thumb_tip).
+**5.** (OPTIONAL) If it gives you an error about the leap daemon not running, stop the leap control panel and use the following command:
 
-(Point)
-finger_tip.x
-finger_tip.y
-finger_tip.z
+```bash
+sudo service leapd restart
+```
 
+**6.** Source your current catkin workspace.
 
+```bash
+source ~/catkin_ws/devel/setup.bash
+```
 
-INSTALLATION
-==============
+**7.** Launch the demo.launch file to see if you have set everything up correctly. If you wish to enable a lowpass filter append enable_filter:=1 to the end of the command.
 
-1. If you don't already have a catkin workspace, please follow these instructions before starting with 2.: http://www.ros.org/wiki/catkin/Tutorials/create_a_workspace
+```bash
+roslaunch lmc_ros_driver demo.launch
+```
 
-2. cd ~/catkin_ws/src
+```bash
+roslaunch lmc_ros_driver demo.launch enable_filter:=1
+```
 
-3. git clone https://github.com/warp1337/rosleapmotion.git
-
-4. cd ~/catkin_ws && catkin_make
-
-5. Start a roscore (another shell) and leapd (another shell)
-
-6. You need to append the location of your LeapSDK (especially /lib and /lib/x64 or x86) to your PYTHONPATH,e.g., export PYTHONPATH=$PYTHONPATH:/path/to/SDK/lib:/path/to/SDK/lib/x64
-Remember that you will need to have your path set at least in the "sender" shell. If you don't want to set it every time, you can also alter the leapinterface.py file (have a look at it).
-
-6. source ~/catkin_ws/devel/setup.bash && rosrun leap_motion sender.py (another shell)
-
-7. source ~/catkin_ws/devel/setup.bash && rosrun leap_motion subscriber.py (another shell) 
-
-8. You are done, you should see the LEAP MOTION coordinates in your shell prompt
-
-
-USE LEAP AS STEREO CAMERA
-============================
-if you want to use leap_motion as stereo_camera, You can use by compiling it.
-
-1. Make sure that You are using LeapSDK ver 2.*
-
-2. You need to append the location of your LeapSDK (especially /lib and /lib/x64 or x86) to your environment variable named LEAP_SDK, e.g., add "export LEAP_SDK=/home/Your_name/LeapDebeloperKit_2.*/LeapSDK " in ~/.bashrc
-
-3. command LeapControlPanel in your shell and enable the feature in the Leap Motion control panel for any application to get the raw camera images.
-
-4. You need to install leap library(libLeap.so). e.g., sudo cp $LEAP_SDK/lib/x64/libLeap.so /usr/local/lib ; sudo ldconfig
-
-5. in your catkin_ws, catkin_make install --pkg leap_motion
-
-6. roslaunch leap_motion leap_camera.launch
-
-7. roslaunch leap_motion leap_stereo.launch
-
+**8.** You are done! You should see an Rviz window opening up displaying the detected hands from the controller.
