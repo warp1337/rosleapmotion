@@ -163,7 +163,13 @@ add_executable(leap_hands
 target_link_libraries(leap_hands
   ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
 )
-install(TARGETS leap_hands
+
+add_executable(leap_camera src/leap_camera.cpp)
+target_link_libraries(leap_camera
+  ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
+)
+
+install(TARGETS leap_camera leap_hands
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -181,13 +187,3 @@ if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   add_rostest(test/test_leap_motion.test test/test_sender.test)
 endif()
-
-install(PROGRAMS
-  scripts/leap_interface.py scripts/sender.py scripts/subscriber.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-install(DIRECTORY
-  launch
-  camera_info
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
