@@ -21,13 +21,9 @@
   <depend>geometry_msgs</depend>
   <depend>visualization_msgs</depend>
   <depend>roscpp</depend>
+  <depend>rospack</depend> 
   <depend>std_msgs</depend>
 
-  <!--
-  <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>std_msgs</build_export_depend>
-  -->
-  
   <build_depend>message_generation</build_depend>
   <exec_depend>message_runtime</exec_depend>
 
@@ -36,9 +32,6 @@
   <depend>rospy</depend>
   <depend>roslib</depend>
   <!-- END -->
-
-  <!-- Think about this -->
-  <depend>rospack</depend>
 
   <test_depend>rostest</test_depend>
   
