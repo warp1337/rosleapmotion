@@ -306,7 +306,7 @@ void LeapListener::onFrame(const Controller& controller)
                     ros_bone_msg.type = boneType;
                     ros_bone_msg.length = bone.length() / 1000.0; // in m
                     ros_bone_msg.width = bone.width() / 1000.0;   // in m
-                    ros_bone_msg.to_string = bone.toString(); // human readable description of the Bone object
+                    ros_bone_msg.to_string = bone.toString();     // human readable description of the Bone object
                     
                     ros_bone_msg.center.push_back(bone.center()[0] / 1000.0); // x in m
                     ros_bone_msg.center.push_back(bone.center()[1] / 1000.0); // y in m
