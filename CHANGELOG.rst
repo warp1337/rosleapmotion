@@ -5,8 +5,7 @@ Changelog for package leap_motion
 0.0.12 (2018-03-06)
 -------------------
 * Reimplementation of the entire Leap Motion driver for ROS
-* Old implementation of the driver is now deprecated and will be removed.
-* Functionality of leap_camera is now in lmc_camera_node, launch it with camera.launch.
+* Old implementation of the driver is now deprecated and will be removed in a year.
 * Contributors: Nowittyusername
 
 0.0.11 (2017-01-14)
