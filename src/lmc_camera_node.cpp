@@ -133,7 +133,6 @@ void CameraListener::onFrame(const Controller& controller) {
   // Encoding of pixels -- channel meaning, ordering, size
   // taken from the list of strings in include/sensor_msgs/image_encodings.h
   image_msg.encoding = "mono8";
-  // is this data bigendian?
   image_msg.is_bigendian = 0;
   
   for(int camera_num = 0; camera_num < 2; camera_num++){
@@ -239,7 +238,7 @@ void CameraListener::onServiceDisconnect(const Controller& controller) {
 
 int main(int argc, char** argv) {
 
-  ros::init(argc, argv, "lmc_ros_camera");
+  ros::init(argc, argv, "leap_motion");
   
   CameraListener listener;
   Controller controller;

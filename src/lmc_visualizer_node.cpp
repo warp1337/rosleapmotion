@@ -36,8 +36,8 @@ visualization_msgs::Marker createJointMarker(const leap_motion::Human::ConstPtr&
     joint_marker.type =  visualization_msgs::Marker::SPHERE;
     joint_marker.action = visualization_msgs::Marker::ADD;
 
-    // The LMC publishes location data in meters from origin
-    joint_marker.pose.position.x = location.position.x; // m
+    // Location data in meters from origin
+    joint_marker.pose.position.x = location.position.x;
     joint_marker.pose.position.y = location.position.y; 
     joint_marker.pose.position.z = location.position.z;
 
@@ -225,7 +225,7 @@ visualization_msgs::Marker createPalmPosition(const leap_motion::Human::ConstPtr
     palm_centre.type = visualization_msgs::Marker::SPHERE;
     palm_centre.action = visualization_msgs::Marker::ADD;
 
-    // The LMC location data in meters from origin
+    // Location data in meters from origin
     palm_centre.pose.position.x = centre_point.position.x;
     palm_centre.pose.position.y = centre_point.position.y; 
     palm_centre.pose.position.z = centre_point.position.z;
