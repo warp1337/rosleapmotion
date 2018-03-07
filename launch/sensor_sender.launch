@@ -1,5 +1,5 @@
-<!-- For backwards compatibility with the old driver files -->
-<!-- Will be DELETED in the future -->
+<!-- For backwards compatibility with the old driver files
+                Will be DELETED in the future              -->
   
 <launch>
   <arg name="freq_prefix" default="_freq" />
