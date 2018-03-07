@@ -215,11 +215,11 @@ void CameraListener::onDeviceChange(const Controller& controller) {
     if(CameraListener::enable_controller_info)
     {  
         ROS_INFO("CameraListener device changed");
-    }
-    const DeviceList devices = controller.devices();
-    for (int i = 0; i < devices.count(); ++i) {
-        ROS_INFO( "id: %s", devices[i].toString().c_str() );
-        ROS_INFO("  isStreaming: %s", (devices[i].isStreaming() ? "true" : "false") );
+        const DeviceList devices = controller.devices();
+        for (int i = 0; i < devices.count(); ++i) {
+            ROS_INFO( "id: %s", devices[i].toString().c_str() );
+            ROS_INFO("  isStreaming: %s", (devices[i].isStreaming() ? "true" : "false") );
+        }
     }
 }
 
