@@ -10,6 +10,9 @@
 #include <boost/shared_ptr.hpp>
 #include <sstream>
 
+/* ##################################################
+    Deprecated and will be removed in the future  
+################################################## */
 
 #define targetWidth 500
 #define targetHeight 500
