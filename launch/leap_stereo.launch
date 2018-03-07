@@ -1,0 +1,6 @@
+<launch>
+  <group ns="leap_motion">
+      <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" 
+	    output="screen"/>
+  </group>
+</launch>
