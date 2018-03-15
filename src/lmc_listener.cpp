@@ -1,4 +1,6 @@
 #include "ros/ros.h"
+#include <tf/transform_datatypes.h>
+
 #include "leap_motion/Human.h"
 #include "leap_motion/Hand.h"
 #include "leap_motion/Finger.h"
@@ -239,7 +241,7 @@ void LeapListener::onFrame(const Controller& controller)
             ros_hand_msg.pinch_strength = hand.pinchStrength(); // The distance between the thumb and index finger of a pinch hand pose.
             ros_hand_msg.time_visible = hand.timeVisible();     // The duration (in seconds) that this Hand has been tracked. 
             ros_hand_msg.to_string = hand.toString();
-            
+
             // The rate of change of the palm position (x,y,z) in m/s.
             ros_hand_msg.palm_velocity.push_back(hand.palmVelocity()[0] / 1000.0); 
             ros_hand_msg.palm_velocity.push_back(hand.palmVelocity()[1] / 1000.0);
@@ -263,11 +265,19 @@ void LeapListener::onFrame(const Controller& controller)
                 (hand.isRight() ? "Right hand" : "Left hand"), hand.id(), hand.palmPosition().toString().c_str() ); 
             }
 
+            tf::Quaternion quat_from_RPY = tf::createQuaternionFromRPY(hand.palmNormal().roll(),\
+                hand.palmNormal().pitch(), hand.palmNormal().yaw() );
+
             // The center position of the palm in meters from the Leap Motion Controller origin. 
             ros_hand_msg.palm_center.position.x = hand.palmPosition().x / 1000.0;
             ros_hand_msg.palm_center.position.y = hand.palmPosition().y / 1000.0;
             ros_hand_msg.palm_center.position.z = hand.palmPosition().z / 1000.0;
-          
+            
+            ros_hand_msg.palm_center.orientation.x = quat_from_RPY[0];
+            ros_hand_msg.palm_center.orientation.y = quat_from_RPY[1];
+            ros_hand_msg.palm_center.orientation.z = quat_from_RPY[2];
+            ros_hand_msg.palm_center.orientation.w = quat_from_RPY[3];
+
             // This is a list of finger messages that will be attached to the hand message
             std::vector<leap_motion::Finger> finger_msg_list; 
 
