@@ -83,7 +83,8 @@ before_install:
 # Create a catkin workspace with the package under integration.
 install:
   # Acquire the essential parts of the LeapSDK
-  - tar -xzvf $CI_SOURCE_PATH/config/Travis/secrets.tar.gz
+  - cd $CI_SOURCE_PATH/config/Travis
+  - tar -xzvf secrets.tar.gz
   - mkdir -p ~/leap/include
   - cd ~/leap/include
   - wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt
