@@ -109,9 +109,13 @@ install:
   - mkdir -p ~/leap/include
   - cd ~/leap/include
   - wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt
+  - ls -la
+  - pwd
   - mkdir -p ~/leap/lib/x64
   - cd ~/leap/lib/x64
   - wget -q -i $CI_SOURCE_PATH/config/Travis/lib_x64_urls.txt
+  - ls -la
+  - pwd
   # Make a catkins_ws
   - mkdir -p ~/catkin_ws/src
   - cd ~/catkin_ws/src
