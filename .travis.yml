@@ -108,7 +108,10 @@ before_install:
 install:
   # Acquire the essential parts of the LeapSDK
   - cd $CI_SOURCE_PATH/config/Travis
+  - pwd
+  - ls -la
   - tar -xzvf secrets.tar.gz
+  - ls -la
   - mkdir -p ~/leap/include
   - cd ~/leap/include
   - wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt
