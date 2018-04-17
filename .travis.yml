@@ -64,7 +64,7 @@ env:
     # as this is where apt-get installs python packages.
     - PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages
     - LEAP_SDK=~/leap
-################################################################################
+###############################################################################
 
 # Install system dependencies, namely a very barebones ROS setup.
 before_install:
