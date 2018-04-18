@@ -68,6 +68,20 @@ env:
 
 # Install system dependencies, namely a very barebones ROS setup.
 before_install:
+  # Turn off command traces while dealing with 
+  # the private key
+  - set +x
+
+  # Get the encrypted private key from the repo settings
+  # This is the private pair to the "Travis GH Pages Deploy Key"
+  # The public key portion can be deleted here:
+  # https://github.com/wp-cli/builds/settings/keys
+  # The private key is in Travis settings here:
+  # https://travis-ci.org/wp-cli/builds/settings
+  - echo -e $WPCLI_GITHUB_DEPLOY_KEY > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - set -x
+  
   # Decrypt
   #- openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d
   - openssl aes-256-cbc -d -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -pass file:~/.ssh/id_rsa
