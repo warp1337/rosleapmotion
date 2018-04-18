@@ -97,10 +97,10 @@ matrix:
 before_install:
     # Decrypt files that are within the repository
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in github_deploy_key_travis.enc -out github_deploy_key_travis -d;
-        chmod 600 github_deploy_key_travis;
+        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/github_deploy_key_travis.enc -out $CI_SOURCE_PATH/config/Travis/github_deploy_key_travis -d;
+        chmod 600 $CI_SOURCE_PATH/config/Travis/github_deploy_key_travis;
         eval $(ssh-agent -s);
-        ssh-add github_deploy_key_travis;
+        ssh-add $CI_SOURCE_PATH/config/Travis/github_deploy_key_travis;
     fi'
   
   # ROS setup
