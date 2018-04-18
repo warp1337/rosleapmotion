@@ -90,14 +90,18 @@ matrix:
     - TRAVIS_PULL_REQUEST="false"
     - INCLUDE_URL_FILENAME=unenc_include_urls.txt
     - LIB_URL_FILENAME=unenc_lib_x64_urls.txt
+    - SDK_LOC=
+        secure: "HRNZ1Po0jugtywHMDgarq1pBvQ1RwWLi3Mrecx5wvQg3EgAoQogt5DFbdiTIKxMPHD0/ZAGwxhQJZRSAY/hoeWMuO3ICy7goEGLpq3KnU/TaQBtf02yEBShrGW5B6eVMsvUc4b5JGFme3QTEzXCeo4mzrywbCZIZtldZHmYu0mZGt6oqhD2jvSuPQgSJiX1Q3rAMrsKIGvPqlr7zdLoE/d0af95tg51d26BOjusQrEmUOPY3ADnGb7MvkHnsXWVxkNANZ8DG4ycbKnWGjACMap1pQtapdOxQrBkFL9sSIQH3Co6a9OsU17G75OpFTU8fPUfDkFNRofpItfj7izDpJ5AXL9MCeaK6NyDgHDFoh2/R4hgoTJv9stkdJYVsRH5MdfzY9ob1qTl7a5rTKWmb8Z2qg02gOb9BVQ1BwdeHS+5PcxM1k4M7vy3SlIRpoGh8Y6NmP0ecvrrZQL+iXLmnFa+9o4SDhEImmNgxvJwyYVFbeXlASCFM2kdvBG4b1RiW9t1iKKFclm1TKqDinANrzAbglza1ze4BOk75wP4bXHq+r2snvtRn3fu3FQ1PgMOIyiQGazWZtK7GB7ge/ZCc5SIogGOP2otACzjAdBr140cr4AgSWfT4C2yXke95Yy4JezEle++dDhljn8/Maub2E6PP5c64lRDC9aHq/ABHF3o="
 ###############################################################################
 
 # Install system dependencies, namely a very barebones ROS setup.
 before_install:
     # Decrypt files that are within the repository
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d;
-        ls -la $CI_SOURCE_PATH/config/Travis/;
+        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in github_deploy_key_travis.enc -out github_deploy_key_travis -d;
+        chmod 600 github_deploy_key_travis;
+        eval $(ssh-agent -s);
+        ssh-add github_deploy_key_travis;
     fi'
   
   # ROS setup
@@ -114,17 +118,14 @@ before_install:
 >>>>>>> Travis build first integration test.
 install:
   # Acquire the essential parts of the LeapSDK
-  - mkdir -p ~/leap/include
-  - mkdir -p ~/leap/lib/x64
   - cd $CI_SOURCE_PATH/config/Travis
-
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
       echo TRAVIS_PULL_REQUEST is False;
-      tar -xzvf secrets.tar.gz;
-      wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt -P ~/leap/include/;
-      wget -q -i $CI_SOURCE_PATH/config/Travis/lib_x64_urls.txt -P ~/leap/lib/x64;
+      git clone $SDK_LOC ~;
     else
       echo TRAVIS_PULL_REQUEST is True;
+      mkdir -p ~/leap/include;
+      mkdir -p ~/leap/lib/x64;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$INCLUDE_URL_FILENAME -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$LIB_URL_FILENAME -P ~/leap/lib/x64;
     fi'
