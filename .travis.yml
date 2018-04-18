@@ -74,6 +74,7 @@ before_install:
     # Decrypt files that are within the repository
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
         openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d;
+        ls -la $CI_SOURCE_PATH/config/Travis/;
     fi'
   
   # ROS setup
@@ -96,14 +97,16 @@ install:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
       tar -xzvf secrets.tar.gz;
       wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt -P ~/leap/include/;
-      wget -q -i $CI_SOURCE_PATH/config/Travis/lib_x64_urls.txt -P ~/leap/include/;
-    else
+      wget -q -i $CI_SOURCE_PATH/config/Travis/lib_x64_urls.txt -P ~/leap/lib/x64;
+    fi'
+
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then
       wget -q -i $CI_SOURCE_PATH/config/Travis/$INCLUDE_URL_FILENAME -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$LIB_URL_FILENAME -P ~/leap/lib/x64;
+      ls -la ~/leap/include/
+      ls -la ~/leap/lib/x64/
     fi'
-  - ls -la ~/leap/include/
-  - ls -la ~/leap/lib/x64/
-  
+
   # Make a catkins_ws
   - mkdir -p ~/catkin_ws/src
   - cd ~/catkin_ws/src
