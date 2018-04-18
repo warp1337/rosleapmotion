@@ -120,7 +120,7 @@ install:
   - cd $CI_SOURCE_PATH/config/Travis
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
       echo TRAVIS_PULL_REQUEST is False;
-      git clone $SDK_LOC ~;
+      git clone $SDK_LOC ~/leap;
     else
       echo TRAVIS_PULL_REQUEST is True;
       mkdir -p ~/leap/include;
