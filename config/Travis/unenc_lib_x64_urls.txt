@@ -1,2 +1,2 @@
-https://www.dropbox.com/s/u58g0jqw7bfwpy3/libLeap.so
+FTP link to libLeap.so
 
