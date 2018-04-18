@@ -94,11 +94,11 @@ matrix:
 before_install:
     # Decrypt files that are within the repository
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-        bash openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d;
+        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d;
     else
-        bash openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d
-        bash pwd;
-        bash ls -la;
+        openssl aes-256-cbc -K $encrypted_030e98bcd2a4_key -iv $encrypted_030e98bcd2a4_iv -in $CI_SOURCE_PATH/config/Travis/secrets.tar.gz.enc -out $CI_SOURCE_PATH/config/Travis/secrets.tar.gz -d
+        pwd;
+        ls -la;
     fi'
   
   # ROS setup
