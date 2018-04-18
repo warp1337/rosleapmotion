@@ -92,7 +92,7 @@ install:
   - mkdir -p ~/leap/include
   - mkdir -p ~/leap/lib/x64
   - cd $CI_SOURCE_PATH/config/Travis
-  
+
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
       tar -xzvf secrets.tar.gz;
       wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt -P ~/leap/include/;
@@ -101,6 +101,8 @@ install:
       wget -q -i $CI_SOURCE_PATH/config/Travis/$INCLUDE_URL_FILENAME -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$LIB_URL_FILENAME -P ~/leap/lib/x64;
     fi'
+  - ls -la ~/leap/include/
+  - ls -la ~/leap/lib/x64/
   
   # Make a catkins_ws
   - mkdir -p ~/catkin_ws/src
