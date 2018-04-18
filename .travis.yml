@@ -64,9 +64,9 @@ env:
     # as this is where apt-get installs python packages.
     - PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages
     - LEAP_SDK=~/leap
-    - TRAVIS_PULL_REQUEST = "true"
-    - INCLUDE_URL_FILENAME = unenc_include_urls.txt
-    - LIB_URL_FILENAME = unenc_lib_x64_urls.txt
+    - TRAVIS_PULL_REQUEST="true"
+    - INCLUDE_URL_FILENAME=unenc_include_urls.txt
+    - LIB_URL_FILENAME=unenc_lib_x64_urls.txt
 ###############################################################################
 
 # Install system dependencies, namely a very barebones ROS setup.
@@ -103,8 +103,8 @@ install:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then
       wget -q -i $CI_SOURCE_PATH/config/Travis/$INCLUDE_URL_FILENAME -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$LIB_URL_FILENAME -P ~/leap/lib/x64;
-      ls -la ~/leap/include/
-      ls -la ~/leap/lib/x64/
+      ls -la ~/leap/include/;
+      ls -la ~/leap/lib/x64/;
     fi'
 
   # Make a catkins_ws
