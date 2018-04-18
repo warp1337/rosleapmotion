@@ -95,12 +95,12 @@ install:
   - cd $CI_SOURCE_PATH/config/Travis
 
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-      echo TRAVIS_PULL_REQUEST is False
+      echo TRAVIS_PULL_REQUEST is False;
       tar -xzvf secrets.tar.gz;
       wget -q -i $CI_SOURCE_PATH/config/Travis/include_urls.txt -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/lib_x64_urls.txt -P ~/leap/lib/x64;
     else
-      echo TRAVIS_PULL_REQUEST is True
+      echo TRAVIS_PULL_REQUEST is True;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$INCLUDE_URL_FILENAME -P ~/leap/include/;
       wget -q -i $CI_SOURCE_PATH/config/Travis/$LIB_URL_FILENAME -P ~/leap/lib/x64;
     fi'
