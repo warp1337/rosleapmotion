@@ -2,7 +2,7 @@
 
 ROS driver for the Leap Motion Controller
 
-[![Build Status](https://travis-ci.org/nowittyusername/leap_motion.svg?branch=travis)](https://travis-ci.org/nowittyusername/leap_motion)
+[![Build Status](https://travis-ci.org/nowittyusername/leap_motion.svg?branch=hydro)](https://travis-ci.org/nowittyusername/leap_motion)
 
 ## REQUIREMENTS
 
