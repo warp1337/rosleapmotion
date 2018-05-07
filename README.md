@@ -2,6 +2,8 @@
 
 ROS driver for the Leap Motion Controller
 
+[![Build Status](https://travis-ci.org/nowittyusername/leap_motion.svg?branch=travis)](https://travis-ci.org/nowittyusername/leap_motion)
+
 ## REQUIREMENTS
 
 You should have [ROS Kinetic](http://wiki.ros.org/kinetic) or a [newer version](http://wiki.ros.org/Distributions) installed on your device and the [Leap Motion SDK](https://developer.leapmotion.com/sdk/v2) for Linux.

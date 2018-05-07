@@ -83,7 +83,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   $ENV{LEAP_SDK}/include/
-  $ENV{LEAP_SDK}/lib/x64
+  $ENV{LEAP_SDK}/lib/x64/
 )
 
 ## Declare a C++ library
