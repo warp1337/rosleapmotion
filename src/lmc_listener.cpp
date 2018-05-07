@@ -233,13 +233,18 @@ void LeapListener::onFrame(const Controller& controller)
             ros_hand_msg.is_present = true;                     // Override the default value
             ros_hand_msg.valid_gestures = false;                // No gestures associated with this hand
             ros_hand_msg.confidence = hand.confidence();        // How confident the controller is with a given hand pose between [0,1] inclusive. 
-            ros_hand_msg.roll = hand.direction().roll();        // The roll angle in radians. 
-            ros_hand_msg.pitch = hand.direction().pitch();      // The pitch angle in radians.
-            ros_hand_msg.yaw = hand.direction().yaw();          // The yaw angle in radians.
-            ros_hand_msg.grab_strength = hand.grabStrength();   // The angle between the fingers and the hand of a grab hand pose. 
-            ros_hand_msg.palm_width = hand.palmWidth() / 1000.0;// in m
-            ros_hand_msg.pinch_strength = hand.pinchStrength(); // The distance between the thumb and index finger of a pinch hand pose.
-            ros_hand_msg.time_visible = hand.timeVisible();     // The duration (in seconds) that this Hand has been tracked. 
+            
+            // Get hand's roll-pitch-yam and convert them into quaternion.
+            // NOTE: Leap Motion roll-pith-yaw is from the perspective of human.
+            // Here it is mapped that roll is about x-, pitch about y-, and yaw about z-axis.
+            ros_hand_msg.roll = hand.direction().pitch();         // The roll angle in radians. 
+            ros_hand_msg.pitch = hand.direction().yaw();          // The pitch angle in radians.
+            ros_hand_msg.yaw = hand.palmNormal().roll();          // The yaw angle in radians.
+
+            ros_hand_msg.grab_strength = hand.grabStrength();     // The angle between the fingers and the hand of a grab hand pose. 
+            ros_hand_msg.palm_width = hand.palmWidth() / 1000.0;  // in m
+            ros_hand_msg.pinch_strength = hand.pinchStrength();   // The distance between the thumb and index finger of a pinch hand pose.
+            ros_hand_msg.time_visible = hand.timeVisible();       // The duration (in seconds) that this Hand has been tracked. 
             ros_hand_msg.to_string = hand.toString();
 
             // The rate of change of the palm position (x,y,z) in m/s.
@@ -265,19 +270,11 @@ void LeapListener::onFrame(const Controller& controller)
                 (hand.isRight() ? "Right hand" : "Left hand"), hand.id(), hand.palmPosition().toString().c_str() ); 
             }
 
-            tf::Quaternion quat_from_RPY = tf::createQuaternionFromRPY(hand.palmNormal().roll(),\
-                hand.palmNormal().pitch(), hand.palmNormal().yaw() );
-
             // The center position of the palm in meters from the Leap Motion Controller origin. 
-            ros_hand_msg.palm_center.position.x = hand.palmPosition().x / 1000.0;
-            ros_hand_msg.palm_center.position.y = hand.palmPosition().y / 1000.0;
-            ros_hand_msg.palm_center.position.z = hand.palmPosition().z / 1000.0;
+            ros_hand_msg.palm_center.x = hand.palmPosition().x / 1000.0;
+            ros_hand_msg.palm_center.y = hand.palmPosition().y / 1000.0;
+            ros_hand_msg.palm_center.z = hand.palmPosition().z / 1000.0;
             
-            ros_hand_msg.palm_center.orientation.x = quat_from_RPY[0];
-            ros_hand_msg.palm_center.orientation.y = quat_from_RPY[1];
-            ros_hand_msg.palm_center.orientation.z = quat_from_RPY[2];
-            ros_hand_msg.palm_center.orientation.w = quat_from_RPY[3];
-
             // This is a list of finger messages that will be attached to the hand message
             std::vector<leap_motion::Finger> finger_msg_list; 
 
