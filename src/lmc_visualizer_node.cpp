@@ -214,7 +214,7 @@ visualization_msgs::Marker createHandOutline(const leap_motion::Human::ConstPtr 
  * \param centre_point  The palm centre of a hand
  */
 visualization_msgs::Marker createPalmPosition(const leap_motion::Human::ConstPtr &human, 
-    std::string hand_ns, unsigned int id, geometry_msgs::Pose centre_point){
+    std::string hand_ns, unsigned int id, geometry_msgs::Point centre_point){
     
     visualization_msgs::Marker palm_centre;
     palm_centre.header.frame_id = human -> header.frame_id;
@@ -226,9 +226,9 @@ visualization_msgs::Marker createPalmPosition(const leap_motion::Human::ConstPtr
     palm_centre.action = visualization_msgs::Marker::ADD;
 
     // Location data in meters from origin
-    palm_centre.pose.position.x = centre_point.position.x;
-    palm_centre.pose.position.y = centre_point.position.y; 
-    palm_centre.pose.position.z = centre_point.position.z;
+    palm_centre.pose.position.x = centre_point.x;
+    palm_centre.pose.position.y = centre_point.y; 
+    palm_centre.pose.position.z = centre_point.z;
 
     palm_centre.scale.x = 0.025;
     palm_centre.scale.y = 0.025;

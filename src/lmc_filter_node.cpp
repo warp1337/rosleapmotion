@@ -115,14 +115,14 @@ double lpf::getFilteredMsrmt(int b_idx, int dim){
  */
 void filterMessage(leap_motion::Hand hand, uint8_t hand_idx){
     if(set_up_right || set_up_left ){
-        hands[hand_idx][5].setInitialPos( hand.palm_center.position.x, 0 , 0);
-        hands[hand_idx][5].setInitialPos( hand.palm_center.position.y, 0 , 1);
-        hands[hand_idx][5].setInitialPos( hand.palm_center.position.z, 0 , 2);
+        hands[hand_idx][5].setInitialPos( hand.palm_center.x, 0 , 0);
+        hands[hand_idx][5].setInitialPos( hand.palm_center.y, 0 , 1);
+        hands[hand_idx][5].setInitialPos( hand.palm_center.z, 0 , 2);
     }
 
-    hand.palm_center.position.x = hands[hand_idx][5].filter( hand.palm_center.position.x, 0 , 0);
-    hand.palm_center.position.y = hands[hand_idx][5].filter( hand.palm_center.position.y, 0 , 1);
-    hand.palm_center.position.z = hands[hand_idx][5].filter( hand.palm_center.position.z, 0 , 2);
+    hand.palm_center.x = hands[hand_idx][5].filter( hand.palm_center.x, 0 , 0);
+    hand.palm_center.y = hands[hand_idx][5].filter( hand.palm_center.y, 0 , 1);
+    hand.palm_center.z = hands[hand_idx][5].filter( hand.palm_center.z, 0 , 2);
 
     leap_motion::Finger finger;
     for(unsigned int j = 0; j < hand.finger_list.size(); j++)
