@@ -31,7 +31,7 @@ float32 pinch_strength
 # The rate of change of the palm position in meters/second. 
 float32[] palm_velocity
 
-# he center position of the palm in millimeters from the Leap Motion Controller origin. 
+# The center position of the palm in millimeters from the Leap Motion Controller origin. 
 geometry_msgs/Pose palm_center
 
 # The estimated width of the palm when the hand is in a flat position. 
