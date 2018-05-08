@@ -217,7 +217,7 @@ int main(int argc, char** argv) {
         hands.push_back( std::vector<lpf> ( 6, lpf( cutoff ) ) );
 
         ros::Subscriber human_sub = nh.subscribe<leap_motion::Human>("leap_device", 1, messageCallback);
-        ros::Publisher f_pub = nh.advertise<leap_motion::Human>("filtered_values", 1);
+        ros::Publisher f_pub = nh.advertise<leap_motion::Human>("leap_filtered", 1);
         filt_pub = &f_pub;
 
         ros::spin();
