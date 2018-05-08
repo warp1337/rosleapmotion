@@ -326,14 +326,12 @@ int main(int argc, char** argv) {
     nh.getParam("/enable_filter", enable_filter);
     ros::Subscriber human_sub;
 
+    human_sub = nh.subscribe<leap_motion::Human>("leap_device", 1, frameCallback);
     if(enable_filter)
     {
-        human_sub = nh.subscribe<leap_motion::Human>("filtered_values", 1, frameCallback);
+        human_sub = nh.subscribe<leap_motion::Human>("leap_filtered", 1, frameCallback);
     }
-    else
-    {
-        human_sub = nh.subscribe<leap_motion::Human>("leap_device", 1, frameCallback);
-    }
+
     ROS_INFO("enable_filter: %s", enable_filter ? "true" : "false");
     
     ros::Publisher m_pub = nh.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1);
