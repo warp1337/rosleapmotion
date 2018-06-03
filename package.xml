@@ -4,15 +4,15 @@
   <version>0.0.11</version>
   <description>ROS driver for the Leap Motion gesture sensor</description>
 
-  <maintainer email="flier@techfak.uni-bielefeld.de">Florian Lier</maintainer>
-  <maintainer email="mas644@gmail.com">Mirza Shah</maintainer>
-  <maintainer email="iiysaito@opensource-robotics.tokyo.jp">Isaac IY Saito</maintainer>
+  <maintainer email="gm130s@gmail.com">Isaac IY Saito</maintainer>
 
   <license>BSD</license>
   <url type="website">https://wiki.ros.org/leap_motion</url>
   <url type="repository">https://github.com/ros-drivers/leap_motion</url>
   <url type="bugtracker">https://github.com/ros-drivers/leap_motion/issues</url>
   <author email="flier@techfak.uni-bielefeld.de">Florian Lier</author>
+  <author email="mas644@gmail.com">Mirza Shah</author>
+  <author email="iiysaito@opensource-robotics.tokyo.jp">Isaac IY Saito</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>camera_calibration_parsers</build_depend>
