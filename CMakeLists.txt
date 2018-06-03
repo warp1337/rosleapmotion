@@ -179,7 +179,7 @@ install(PROGRAMS
 )
 install(DIRECTORY
   launch
-  camera_info
+  config/camera_info
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
