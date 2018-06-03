@@ -1,3 +1,0 @@
-FTP link to Leap.h
-FTP link to Leap.i
-FTP link LeapMath.h
