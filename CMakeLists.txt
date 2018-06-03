@@ -82,8 +82,8 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
-  $ENV{LEAP_SDK}/include/
-  $ENV{LEAP_SDK}/lib/x64/
+  ${PROJECT_SOURCE_DIR}/LeapSDK/include/
+  ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/
 )
 
 ## Declare a C++ library
@@ -94,8 +94,8 @@ add_dependencies(lmc_listener
   ${PROJECT_NAME}_gencpp
 )
 target_link_libraries(lmc_listener
-   ${catkin_LIBRARIES}
-   $ENV{LEAP_SDK}/include/Leap.h
+  ${catkin_LIBRARIES}
+  ${PROJECT_SOURCE_DIR}/LeapSDK/include/Leap.h
 )
 
 ## Declare a C++ executable
@@ -113,7 +113,7 @@ add_dependencies( ${PROJECT_NAME}_driver_node
 target_link_libraries(${PROJECT_NAME}_driver_node
   ${catkin_LIBRARIES}
   lmc_listener
-  $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 # Node that visualizes the data it gets from the controller
@@ -126,7 +126,7 @@ add_dependencies(${PROJECT_NAME}_visualizer_node
 )
 target_link_libraries(${PROJECT_NAME}_visualizer_node  
   ${catkin_LIBRARIES}
-  $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 # Node that publishes raw camera images. Be sure to 
@@ -136,7 +136,7 @@ add_executable(${PROJECT_NAME}_camera_node
 )
 target_link_libraries(${PROJECT_NAME}_camera_node
   ${catkin_LIBRARIES} 
-  $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 # Filter node implementing a 2nd-order Butterworth lowpass filter
@@ -149,7 +149,7 @@ add_dependencies(${PROJECT_NAME}_filter_node
 )
 target_link_libraries(${PROJECT_NAME}_filter_node
   ${catkin_LIBRARIES} 
-  $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 #########################################################
@@ -161,12 +161,12 @@ add_executable(leap_hands
   src/leap_hands.cpp
 )
 target_link_libraries(leap_hands
-  ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 add_executable(leap_camera src/leap_camera.cpp)
 target_link_libraries(leap_camera
-  ${catkin_LIBRARIES} $ENV{LEAP_SDK}/lib/x64/libLeap.so
+  ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/LeapSDK/lib/x64/libLeap.so
 )
 
 install(TARGETS leap_camera leap_hands
@@ -179,7 +179,7 @@ install(PROGRAMS
 )
 install(DIRECTORY
   launch
-  camera_info
+  config/camera_info
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
