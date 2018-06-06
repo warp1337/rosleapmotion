@@ -4,6 +4,7 @@
   <version>0.0.11</version>
   <description>ROS driver for the Leap Motion gesture sensor</description>
 
+  <maintainer email="nowittyusername@hotmail.com">Nowittyusername</maintainer>
   <maintainer email="gm130s@gmail.com">Isaac IY Saito</maintainer>
 
   <license>BSD</license>
