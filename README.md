@@ -16,7 +16,7 @@ There is also a filter node implementing a 2nd-order Butterworth lowpass filter 
 
 ## INSTALLATION
 
-**1.** You need to append the location of your LeapSDK to your environment variables. This step differs depending on where you saved the SDK. The LeapSDK folder should contain the following files: include/Leap.h, include/LeapMath.h, lib/x64/libLeap.so and lib/x86/libLeap.so.
+**1.** If you wish to use the old deprecated Python API you need to append the location of your LeapSDK to your environment variables. This step differs depending on where you saved the SDK. The LeapSDK folder should contain the following [files](https://developer-archive.leapmotion.com/documentation/v2/python/devguide/Project_Setup.html): lib/Leap.py, lib/x86/LeapPython.so, lib/x86/libLeap.so, lib/x64/LeapPython.so, lib/x64/libLeap.so lib/LeapPython.so, lib/libLeap.dylib.
 
 Example:
 
