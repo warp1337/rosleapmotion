@@ -56,7 +56,7 @@ source ~/catkin_ws/devel/setup.bash
 **7.** Launch the demo.launch file to see if you have set everything up correctly. If you wish to enable a lowpass filter change "enable_filter" to true in filter_params.yaml file.
 
 ```bash
-roslaunch leap_motion everything.launch
+roslaunch leap_motion demo.launch
 ```
 
 **8.** You are done! You should see an RViz window opening up displaying the detected hands from the controller.
