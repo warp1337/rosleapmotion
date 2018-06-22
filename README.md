@@ -41,7 +41,7 @@ export LEAP_SDK=~/lib/LeapSDK
 LeapControlPanel
 ```
 
-**5.** (OPTIONAL) If it gives you an error about the leap daemon not running, stop the LeapControlPanel and use the following command:
+**5.** (OPTIONAL) If it gives you an error about the leap daemon not running, stop the LeapControlPanel have a look [here](https://forums.leapmotion.com/t/error-in-leapd-malloc/4271/13) and use the following command:
 
 ```bash
 sudo service leapd restart
