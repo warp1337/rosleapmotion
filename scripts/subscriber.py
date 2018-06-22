@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+""" For backwards compatibility with the old driver files
+                Will be DELETED in the future               """
+
 __author__ = 'flier'
 
 import rospy
