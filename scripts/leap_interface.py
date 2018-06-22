@@ -14,6 +14,9 @@
 # provided with the SDK.                                                        #
 #################################################################################
 
+""" For backwards compatibility with the old driver files
+                Will be DELETED in the future               """
+
 import sys
 import time
 # Set (append) your PYTHONPATH properly, or just fill in the location of your LEAP
