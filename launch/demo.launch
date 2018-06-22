@@ -22,6 +22,6 @@
     </group>
 
     <!-- Open a preconfigured RViz window -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find leap_motion)/config/RViz/leap_everything.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find leap_motion)/config/RViz/leap_demo.rviz" />
 
 </launch>
