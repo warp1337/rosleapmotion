@@ -2,6 +2,9 @@
 
 __author__ = 'Igor Zubrycki'
 
+""" For backwards compatibility with the old driver files
+                Will be DELETED in the future               """
+
 import rospy
 import leap_interface
 import tf

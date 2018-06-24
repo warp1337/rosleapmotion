@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>leap_motion</name>
-  <version>0.0.11</version>
+  <version>0.0.12</version>
   <description>ROS driver for the Leap Motion gesture sensor</description>
 
   <maintainer email="nowittyusername@hotmail.com">Nowittyusername</maintainer>
@@ -16,31 +16,27 @@
   <author email="iiysaito@opensource-robotics.tokyo.jp">Isaac IY Saito</author>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>camera_calibration_parsers</build_depend>
-  <build_depend>camera_info_manager</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>image_transport</build_depend>
-  <build_depend>message_generation</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>roslib</build_depend>
-  <build_depend>rospack</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>visualization_msgs</build_depend>
 
-  <run_depend>camera_calibration_parsers</run_depend>
-  <run_depend>camera_info_manager</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>image_transport</run_depend>
-  <run_depend>message_runtime</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>roslib</run_depend>
-  <run_depend>rospack</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>visualization_msgs</run_depend>
+  <depend>camera_calibration_parsers</depend>
+  <depend>camera_info_manager</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospack</depend> 
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <!-- For backwards compatibility with the old driver files -->
+  <depend>image_transport</depend>
+  <depend>rospy</depend>
+  <depend>roslib</depend>
+  <!-- END -->
 
   <test_depend>rostest</test_depend>
+  
   <export>
   </export>
 </package>

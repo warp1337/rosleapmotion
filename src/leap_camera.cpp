@@ -10,6 +10,9 @@
 #include <boost/shared_ptr.hpp>
 #include <sstream>
 
+/* ##################################################
+    Deprecated and will be removed in the future  
+################################################## */
 
 #define targetWidth 500
 #define targetHeight 500
@@ -68,8 +71,8 @@ void CameraListener::onInit(const Controller& controller){
   rp.crawl(search_path, 1);
   std::string path;
   if (rp.find("leap_motion",path)==true) {
-    default_l_info_filename = path + std::string("/camera_info/leap_cal_left.yml");
-    default_r_info_filename = path + std::string("/camera_info/leap_cal_right.yml");
+    default_l_info_filename = path + std::string("/config/camera_info/leap_cal_left.yml");
+    default_r_info_filename = path + std::string("/config/camera_info/leap_cal_right.yml");
   }
   else {
     default_l_info_filename = "";
