@@ -1,3 +1,0 @@
-<launch>
-  <include file="$(find leap_motion)/test/test_sender.test" />
-</launch>

@@ -182,8 +182,3 @@ install(DIRECTORY
   config/camera_info
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
-
-if(CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  add_rostest(test/test_leap_motion.test test/test_sender.test)
-endif()
