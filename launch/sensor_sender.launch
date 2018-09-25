@@ -1,0 +1,12 @@
+<!-- For backwards compatibility with the old driver files
+                Will be DELETED in the future              -->
+  
+<launch>
+  <arg name="freq_prefix" default="_freq" />
+  <arg name="freq_value" default="0.01" />
+  <arg name="freq_limit" default="50" />
+
+  <node name="sender_freq" 
+        pkg="leap_motion" type="sender.py" args="$(arg freq_prefix):=$(arg freq_value)" />
+
+</launch>
