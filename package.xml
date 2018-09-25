@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>leap_motion</name>
-  <version>0.0.12</version>
+  <version>0.0.13</version>
   <description>ROS driver for the Leap Motion gesture sensor</description>
 
   <maintainer email="nowittyusername@hotmail.com">Nowittyusername</maintainer>
